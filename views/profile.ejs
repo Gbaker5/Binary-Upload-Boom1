@@ -1,0 +1,75 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+    <div class="navbar-container col-2"> <!--sidebar nav-->
+      <div class="nav-container">
+        <nav class="nav flex-column">
+          <a class="nav-link active nav-pills" aria-current="page" href="#">Profile Pic<img src="" alt=""></a>
+          <a class="nav-link nav-pills" href="/profile">HOME</a>
+          <a class="nav-link nav-pills" href="/feed">FEED</a>
+          <a class="nav-link nav-pills">EXPLORE</a>
+        </nav>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-12">
+        <img src="" alt="profile pic">
+      </div>
+      
+    </div>
+      <div class="col-5"> <!--this column takes up the first half of space (contains the forms) allows them to be side by side-->
+          <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+          <div class="mt-5">  <!--mt is margin top-->
+            <h2>Add a post</h2>
+            <!--this is the post form-->
+            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="title" name="title">
+              </div>
+              <div class="mb-3">
+                <label for="caption" class="form-label">Caption</label>
+                <textarea class="form-control" id="caption" name="caption"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="imgUpload" class="form-label">Image</label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <!---->
+      <div class="col-5"> <!--this column takes up the second half of space (contains all the photos)-->
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/post/<%= posts[i]._id%>">
+              <img class="img-fluid" src="<%= posts[i].image%>">
+            </a>
+          </li>
+        <% } %>
+        </ul>
+        <div class="row justify-content-center mt-5">
+          <a class="btn btn-primary" href="/feed">Return to Feed</a>
+        </div>  
+      </div>  
+    </div>
+  </div>
+  <div class="second-nav ">
+    <ul class="nav nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Much longer nav link</a>
+      </li>
+     
+    </ul>
+  </div>
+</div>
+<%- include('partials/footer') -%>

@@ -1,0 +1,13 @@
+.navbar-container{
+    border: solid 1px black
+}
+
+
+
+.nav-link:hover{
+    margin: 5px;
+    background-color: blue;
+    color:white;
+    border: 1px solid blue;
+    border-radius: 5px;
+}
