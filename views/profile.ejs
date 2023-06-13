@@ -1,22 +1,29 @@
 <%- include('partials/header') -%>
 <div class="container">
-  <div class="row mt-5">
-    <div class="navbar-container col-2"> <!--sidebar nav-->
-      <div class="nav-container">
-        <nav class="nav flex-column">
-          <a class="nav-link active nav-pills" aria-current="page" href="#">Profile Pic<img src="" alt=""></a>
-          <a class="nav-link nav-pills" href="/profile">HOME</a>
-          <a class="nav-link nav-pills" href="/feed">FEED</a>
-          <a class="nav-link nav-pills">EXPLORE</a>
-        </nav>
-      </div>
+
+  <!--Profile Picture-->
+  <div class="row col-12 justify-content-center">
+    
+      <img class="profile-pic" src="imgs/prof1.jpg" alt="profile pic">
+   
+  </div>
+
+  
+
+  <div class="row mt-5"> <!--this is the row for the form and the photos -->
+     
+    <!--Navbar-->
+   <div class="navbar-container col-2"> <!--sidebar nav-->
+    <div class="nav-container">
+      <nav class="nav flex-column">
+        <a class="nav-link active nav-pills" aria-current="page" href="#">Profile Pic<img src="" alt=""></a>
+        <a class="nav-link nav-pills" href="/profile">HOME</a>
+        <a class="nav-link nav-pills" href="/feed">FEED</a>
+        <a class="nav-link nav-pills">EXPLORE</a>
+      </nav>
     </div>
-    <div class="row ">
-      <div class="col-12">
-        <img src="" alt="profile pic">
-      </div>
-      
-    </div>
+  </div>
+   
       <div class="col-5"> <!--this column takes up the first half of space (contains the forms) allows them to be side by side-->
           <div>
               <p><strong>User Name</strong>: <%= user.userName %></p>
@@ -47,7 +54,7 @@
       <div class="col-5"> <!--this column takes up the second half of space (contains all the photos)-->
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
+          <li class="col-6 justify-content-between mt-5 pbox-pics">
             <a href="/post/<%= posts[i]._id%>">
               <img class="img-fluid" src="<%= posts[i].image%>">
             </a>
@@ -59,17 +66,7 @@
         </div>  
       </div>  
     </div>
-  </div>
-  <div class="second-nav ">
-    <ul class="nav nav-pills nav-fill">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Much longer nav link</a>
-      </li>
-     
-    </ul>
-  </div>
 </div>
+ 
+
 <%- include('partials/footer') -%>
