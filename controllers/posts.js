@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const Profile = require("../models/userProfile")
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -10,6 +11,26 @@ module.exports = {
       console.log(err);
     }
   },
+  //
+  getProfileEdit: async (req, res) =>{
+    try {
+
+      res.render("profileEdit.js", {});
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  postProfileEdit: async (req, res) =>{
+    try {
+
+      res.render("profileEdit.js", {});
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+//
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();

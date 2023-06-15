@@ -24,10 +24,10 @@
     </div>
   </div>
    
-      <div class="col-5"> <!--this column takes up the first half of space (contains the forms) allows them to be side by side-->
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
+      <div class=" profile-input-ct ms-1 col-8"> <!--this column takes up the first half of space (contains the forms) allows them to be side by side-->
+          <div class="user-info">
+              <p><strong>User Name:</strong> <%= user.userName %></p>
+              <p><strong>Email:</strong> <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <div class="mt-5">  <!--mt is margin top-->
@@ -51,7 +51,7 @@
           </div>
       </div>
       <!---->
-      <div class="col-5"> <!--this column takes up the second half of space (contains all the photos)-->
+      <div class="col-10"> <!--this column takes up the second half of space (contains all the photos)-->
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="col-6 justify-content-between mt-5 pbox-pics">
