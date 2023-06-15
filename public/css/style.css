@@ -34,31 +34,52 @@ h1 img{
     
 }
 
-img{
-   
-    
-}
-
-/*Profile*/
+/*Nav*/
 .navbar-container{
-    border: solid 1px black
+    border: solid 3px black;
+    background: linear-gradient(red, black)
+}
+
+.nav-container{
+    background-color: linear-gradient(rgba(255,0,0,0.5), rgba(0,0,0,0.5))
 }
 
 
-
+.nav-pills{
+    width:100%;
+    color:black;
+}
+.nav-link{
+    width:100%;
+}
 .nav-link:hover{
-    margin: 5px;
-    background-color: blue;
+    margin: 2px;
+    background-color: black;
     color:white;
-    border: 1px solid blue;
+    border: 1px solid#f9dc98 ;
     border-radius: 5px;
 }
 
+.nav-pic{
+    height:5em;
+    width:5em;
+    border-radius:180px;
+    border: #f9dc98 2px solid;
+}
+
+.active{
+    background-color:#f9dc98 ;
+    border:#f9dc98 5px solid;
+}
+
+
+/*Profile*/
 .profile-pic{
-    height:15em;
-    width:15em;
-    
-    border-radius: 100px;
+    height:20em;
+    width:20em;
+    border:red solid 10px;
+    border-radius: 180px;
+    background-color: black;
 }
 
 .pbox-pics a img{
