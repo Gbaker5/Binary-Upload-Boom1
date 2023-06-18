@@ -11,11 +11,11 @@ module.exports = {
       console.log(err);
     }
   },
-  //
-  getProfileEdit: async (req, res) =>{
+  
+  getProfileEdit: async (req, res) => {
     try {
-
-      res.render("profileEdit.js", {});
+      const profile = await Profile.find({ user: req.user.id });
+      res.render("profileEdit.ejs", { profile: profile, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -23,14 +23,24 @@ module.exports = {
 
   postProfileEdit: async (req, res) =>{
     try {
-
-      res.render("profileEdit.js", {});
+      console.log(req.file)
+      
+      console.log(req.file.path)
+      const result = await cloudinary.uploader.upload(req.file.path);
+      
+      await Profile.create({
+        user: req.user.id,
+        profilePic: result.secure_url,
+        cloudinaryId: result.public_id,      
+      });
+      console.log("Profile picture has been changed!");
+      res.redirect("/profile ");
     } catch (err) {
       console.log(err);
     }
   },
 
-//
+
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();

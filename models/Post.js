@@ -23,7 +23,7 @@ const PostSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "User", //user id created from user.js 
   },
   createdAt: {
     type: Date,
