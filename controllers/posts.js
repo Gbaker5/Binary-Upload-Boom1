@@ -23,9 +23,7 @@ module.exports = {
 
   postProfileEdit: async (req, res) =>{
     try {
-      console.log(req.file)
       
-      console.log(req.file.path)
       const result = await cloudinary.uploader.upload(req.file.path);
       
       await Profile.create({
@@ -34,7 +32,7 @@ module.exports = {
         cloudinaryId: result.public_id,      
       });
       console.log("Profile picture has been changed!");
-      res.redirect("/profile ");
+      res.redirect("/profile");
     } catch (err) {
       console.log(err);
     }
