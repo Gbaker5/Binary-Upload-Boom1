@@ -5,8 +5,10 @@ const Profile = require("../models/userProfile")
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      const posts = await Post.find({ user: req.user.id }); //find all posts in database by user
+      const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }); //The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
+      res.render("profile.ejs", { posts: posts, profile: profile, user: req.user }); //renders profile page with post array, profile array, and user in ejs page
+      
     } catch (err) {
       console.log(err);
     }
@@ -14,8 +16,10 @@ module.exports = {
   
   getProfileEdit: async (req, res) => {
     try {
-      const profile = await Profile.find({ user: req.user.id });
-      res.render("profileEdit.ejs", { profile: profile, user: req.user });
+      
+      const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" });//The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
+      res.render("profileEdit.ejs", { profile: profile, user: req.user }); //renders profile array and user
+      console.log(profile)
     } catch (err) {
       console.log(err);
     }
@@ -24,15 +28,15 @@ module.exports = {
   postProfileEdit: async (req, res) =>{
     try {
       
-      const result = await cloudinary.uploader.upload(req.file.path);
+      const result = await cloudinary.uploader.upload(req.file.path); //send image to cloudinary
       
-      await Profile.create({
+      await Profile.create({ //create Profile object and send to Mongo database
         user: req.user.id,
         profilePic: result.secure_url,
         cloudinaryId: result.public_id,      
       });
       console.log("Profile picture has been changed!");
-      res.redirect("/profile");
+      res.redirect("/profileEdit"); //refresh profileEdit page
     } catch (err) {
       console.log(err);
     }
@@ -41,15 +45,15 @@ module.exports = {
 
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean(); //find all posts and sort in descending order putting most recent at the top
+      res.render("feed.ejs", { posts: posts }); //renders posts
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
+      const post = await Post.findById(req.params.id); //find post in db with specific id (in ejs id is all the href/link to specific post page)
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
       console.log(err);
