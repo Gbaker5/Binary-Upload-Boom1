@@ -34,6 +34,8 @@ h1 img{
     
 }
 
+    
+
 /*Nav*/
 .navbar-container{
     border: solid 3px black;
@@ -77,9 +79,14 @@ h1 img{
 
 .active{
     background-color:#f9dc98;
-    border:#f9dc98 5px solid;
+    border:black 5px solid;
 }
 
+.profile-active{
+    background-color:#f9dc98;
+    border:black 5px solid;
+    margin-top: 2px;
+}
 
 /*Profile*/
 
@@ -118,4 +125,16 @@ h1 img{
 .user-info p strong{
     color:black;
     text-transform:capitalize;
+}
+
+/*Individual POSTS*/
+
+.comments{
+    color:black;
+}
+
+.comments-ct{
+    background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+    border: 1px solid black;
+    border-radius: 20px;
 }

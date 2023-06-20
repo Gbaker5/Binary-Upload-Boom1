@@ -13,4 +13,10 @@ router.put("/likePost/:id", postsController.likePost);
 
 router.delete("/deletePost/:id", postsController.deletePost);
 
+
+
+
+
 module.exports = router;
+
+//should it be post/:id/getcomment?

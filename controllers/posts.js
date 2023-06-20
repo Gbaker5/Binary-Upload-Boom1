@@ -1,6 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Profile = require("../models/userProfile")
+const Comments = require("../models/Comments")
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -13,13 +14,14 @@ module.exports = {
       console.log(err);
     }
   },
-  
+  //profile Edit
   getProfileEdit: async (req, res) => {
     try {
-      
+      const count = await Profile.count({user: req.user.id}) //counts all profile documents
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" });//The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
       res.render("profileEdit.ejs", { profile: profile, user: req.user }); //renders profile array and user
       console.log(profile)
+      console.log(count)
     } catch (err) {
       console.log(err);
     }
@@ -42,7 +44,7 @@ module.exports = {
     }
   },
 
-
+  //Feed
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean(); //find all posts and sort in descending order putting most recent at the top
@@ -51,15 +53,19 @@ module.exports = {
       console.log(err);
     }
   },
+  //Posts
   getPost: async (req, res) => {
     try {
+      
+      const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" })
       const post = await Post.findById(req.params.id); //find post in db with specific id (in ejs id is all the href/link to specific post page)
-      res.render("post.ejs", { post: post, user: req.user });
+      const comments = await Comments.find({post: req.params.id}).sort({ createdAt: "desc" }).lean() //find all coments connected to the post with this ID
+      res.render("post.ejs", { post: post, user: req.user, profile: profile, comments: comments });
     } catch (err) {
       console.log(err);
     }
   },
-  createPost: async (req, res) => {
+  createPost: async (req, res) => { 
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
@@ -93,6 +99,24 @@ module.exports = {
     }
   },
   deletePost: async (req, res) => {
+    try {
+      // Find post by id
+      let post = await Post.findById({ _id: req.params.id });
+      // Delete image from cloudinary
+      await cloudinary.uploader.destroy(post.cloudinaryId);
+      // Delete post from db
+      await Post.remove({ _id: req.params.id });
+      console.log("Deleted Post");
+      res.redirect("/profile");
+    } catch (err) {
+      res.redirect("/profile");
+    }
+  },
+  //comments
+  
+
+  
+  deleteComment: async (req, res) => {
     try {
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
