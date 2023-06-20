@@ -2,13 +2,20 @@
 <div class="container">
 
   <!--Profile Picture-->
+  <%if(profile == 'undefined'){%>
+    <div class="row col-12 justify-content-center">
+    
+      <img class="profile-pic" src="imgs/Default_pfp.svg.png" alt="profile pic">
+   
+  </div>
+  <%} else {%>
   <div class="row col-12 justify-content-center">
     
       <img class="profile-pic" src="<%= profile[0].profilePic%>" alt="profile pic">
    
   </div>
 
-  
+<%}%>
 
   <div class="row mt-5"> <!--this is the row for the form and the photos -->
      
