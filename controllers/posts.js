@@ -59,7 +59,7 @@ module.exports = {
       
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" })
       const post = await Post.findById(req.params.id); //find post in db with specific id (in ejs id is all the href/link to specific post page)
-      const comments = await Comments.find({post: req.params.id}).sort({ createdAt: "desc" }).lean() //find all coments connected to the post with this ID
+      const comments = await Comments.find({postId: req.params.id}).sort({ createdAt: "desc" }).lean() //find all coments connected to the post with this ID
       res.render("post.ejs", { post: post, user: req.user, profile: profile, comments: comments });
     } catch (err) {
       console.log(err);
