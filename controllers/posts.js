@@ -4,6 +4,27 @@ const Profile = require("../models/userProfile")
 const Comments = require("../models/Comments")
 
 module.exports = {
+  getSignupProfile: async (req, res) =>{
+    res.render("signup-profile.ejs");
+  },
+
+  postSignupProfile: async (req, res) =>{
+    try {
+      
+      const result = await cloudinary.uploader.upload(req.file.path); //send image to cloudinary
+      
+      await Profile.create({ //create Profile object and send to Mongo database
+        user: req.user.id,
+        profilePic: result.secure_url,
+        cloudinaryId: result.public_id,      
+      });
+      console.log("Profile picture has been changed!");
+      res.redirect("/profile"); //refresh profileEdit page
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id }); //find all posts in database by user

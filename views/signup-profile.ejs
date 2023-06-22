@@ -1,0 +1,27 @@
+<%- include('partials/header') -%>
+
+<main class="container">
+    <div class="row justify-content-around mt-5">
+        <h2>Let's get started with a Profile Pic</h2>
+        <p>Make sure its your Good side <i class="fa-regular fa-face-grin-wink"></i></p>
+        <!--this is the post form-->
+        <form action="/signupProfile"  enctype="multipart/form-data" method="POST">
+         
+          <div class="mb-3">
+            <label for="imgUpload" class="form-label">Image</label>
+            <input type="file" class="form-control" id="imageUpload" name="file">
+          </div>
+          <p>This image must be a .jpg, jpeg, or .png file.</p>
+          <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+        </form>
+    </div>
+    <div class>
+        
+        <p><strong>DO NOT GO TO PREVIOUS PAGE. YOU MUST SUBMIT PICTURE TO CONTINUE OR EMAIL WILL BE LOST</strong></p>
+    </div>
+   
+
+</main>
+    
+
+<%- include('partials/footer') -%>
