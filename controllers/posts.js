@@ -2,6 +2,7 @@ const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Profile = require("../models/userProfile")
 const Comments = require("../models/Comments")
+const User = require("../models/User")
 
 module.exports = {
   getSignupProfile: async (req, res) =>{
@@ -30,6 +31,7 @@ module.exports = {
       const posts = await Post.find({ user: req.user.id }); //find all posts in database by user
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }); //The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
       res.render("profile.ejs", { posts: posts, profile: profile, user: req.user }); //renders profile page with post array, profile array, and user in ejs page
+
       
     } catch (err) {
       console.log(err);
@@ -38,9 +40,10 @@ module.exports = {
   //profile Edit
   getProfileEdit: async (req, res) => {
     try {
-      const count = await Profile.count({user: req.user.id}) //counts all profile documents
+      const count = await Profile.countDocuments({user: req.user.id}) //counts all profile documents
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" });//The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
       res.render("profileEdit.ejs", { profile: profile, user: req.user }); //renders profile array and user
+      
       console.log(profile)
       console.log(count)
     } catch (err) {
@@ -76,12 +79,32 @@ module.exports = {
   },
   //Posts
   getPost: async (req, res) => {
-    try {
-      
-      const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" })
+    try { //if comment[i].madeBy = profile[i].user){profile[i].}
+      //const allProfile = await Profile.find()
+      const allUsers = await User.find()
+      const allProfile = await Profile.find()
+      const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }) //profiles of the user that is logged in (this for nav pic)
       const post = await Post.findById(req.params.id); //find post in db with specific id (in ejs id is all the href/link to specific post page)
-      const comments = await Comments.find({postId: req.params.id}).sort({ createdAt: "desc" }).lean() //find all coments connected to the post with this ID
-      res.render("post.ejs", { post: post, user: req.user, profile: profile, comments: comments });
+      const comments = await Comments.find({postId: req.params.id}).sort({ createdAt: "desc" }).lean() //find all comments in comment collection that have postID that matches the id in POST variable 
+      console.log(comments)
+      //
+      //for(let i=0;i<comments.length;i++){
+        //console.log("comment user" + "-" + comments[i].madeBy)
+
+        //for(let j=0;j<allUsers.length;j++){
+          //console.log("users" + "-" + allUsers[j]._id)
+          
+          //if(comments[i].madeBy == allUsers[j]._id){
+            //console.log("This is the user" + allUsers[j]._id)
+          //}
+        //}
+      //}
+      
+      
+      
+      
+      //console.log(comments)
+      res.render("post.ejs", { post: post, user: req.user, profile: profile, comments: comments, allProfile: allProfile, allUsers: allUsers});
     } catch (err) {
       console.log(err);
     }

@@ -130,6 +130,7 @@ h1 img{
 /*Individual POSTS*/
 
 .comments{
+
     color:black;
 }
 
@@ -137,4 +138,10 @@ h1 img{
     background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
     border: 1px solid black;
     border-radius: 20px;
+}
+
+.comments img{
+    height: 40px;
+    width: 40px;
+    border-radius: 180px;
 }
