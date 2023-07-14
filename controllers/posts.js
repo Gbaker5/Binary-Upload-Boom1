@@ -81,30 +81,31 @@ module.exports = {
   getPost: async (req, res) => {
     try { //if comment[i].madeBy = profile[i].user){profile[i].}
       //const allProfile = await Profile.find()
-      const allUsers = await User.find()
-      const allProfile = await Profile.find()
+      //const allUsers = await User.find()
+      //const allProfile = await Profile.find()
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }) //profiles of the user that is logged in (this for nav pic)
       const post = await Post.findById(req.params.id); //find post in db with specific id (in ejs id is all the href/link to specific post page)
+
+      let commentPosterProfilePicArr = [];
+
       const comments = await Comments.find({postId: req.params.id}).sort({ createdAt: "desc" }).lean() //find all comments in comment collection that have postID that matches the id in POST variable 
       console.log(comments)
-      //
-      //for(let i=0;i<comments.length;i++){
-        //console.log("comment user" + "-" + comments[i].madeBy)
 
-        //for(let j=0;j<allUsers.length;j++){
-          //console.log("users" + "-" + allUsers[j]._id)
-          
-          //if(comments[i].madeBy == allUsers[j]._id){
-            //console.log("This is the user" + allUsers[j]._id)
-          //}
-        //}
-      //}
-      
-      
-      
+      //
+      for(let i=0;i<comments.length;i++){
+        const commentPoster = await Profile.find({user: comments[i].madeBy}).sort({createdAt: "desc"});
+        const image = commentPoster[0].profilePic;
+        commentPosterProfilePicArr.push(image);
+
+      }
       
       //console.log(comments)
-      res.render("post.ejs", { post: post, user: req.user, profile: profile, comments: comments, allProfile: allProfile, allUsers: allUsers});
+      res.render("post.ejs", { 
+        post: post, 
+        user: req.user, 
+        profile: profile, 
+        comments: comments, 
+        posterImage: commentPosterProfilePicArr,});
     } catch (err) {
       console.log(err);
     }

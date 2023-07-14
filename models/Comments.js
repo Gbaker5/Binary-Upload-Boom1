@@ -13,15 +13,7 @@ const commentsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
         },
-    profilePic: {
-        //add profile schema?
-        type: String,
-        require: true,
-        },
-    cloudinaryId: {
-        type: String,
-        require: true,
-        },     
+    
     likes: {
         type: Number,
         required: true,

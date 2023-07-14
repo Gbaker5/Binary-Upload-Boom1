@@ -18,8 +18,7 @@ createComment: async (req, res) => {
         madeBy: req.user.id,
         postId: req.params.id,
         likes:0,
-        profilePic: profile[0].profilePic,
-        cloudinaryId: profile[0].cloudinaryId,
+        
       });
       
       console.log("Comment has been added!");

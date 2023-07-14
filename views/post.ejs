@@ -54,9 +54,10 @@
             <% for(var i=0; i<comments.length; i++) {%>
                 
                 <li class="col-6 comments justify-content-around mt-5">
-                  <a>
+                  
+                  <a href="/profile">
                     
-                    <img class="img-fluid" src="<%=comments[i].profilePic%>"> <!--small profile image on left with link to that person profile then comment to the right--> 
+                    <img class="img-fluid" src="<%=posterImage[i]%>"> <!--small profile image on left with link to that person profile then comment to the right--> 
                   </a>
                   <span><%= comments[i].comment%></span><!--comments to the right of picture-->
                   
