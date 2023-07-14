@@ -6,7 +6,7 @@
    <div class="navbar-container col-2"> <!--sidebar nav-->
     <div class="nav-container">
       <nav class="nav flex-column">
-        <a class="nav-link nav-pills" aria-current="page" href="/profileEdit"><img class="nav-pic" src="<%= profile[0].profilePic%>" alt=""><i class="edit-user fa-solid fa-user-pen"></i></a>
+        <a class="nav-link nav-pills" aria-current="page" href="/profile"><img class="nav-pic" src="<%= profile[0].profilePic%>" alt=""></a>
         <a class="nav-link nav-pills" href="/profile">HOME</a>
         <a class="nav-link nav-pills" href="/feed">FEED</a>
         <a class="nav-link nav-pills"href="">FRIENDS</a>
@@ -48,18 +48,18 @@
 
       <div class="col-11 comments-ct mt-1 "><!--comments-->
       
-        <div class="col-6 mt-2 comments-ct2">
+        <div class="col-7 mt-2 comments-ct2">
             
           <ul class="row col-10 list-group">
             <% for(var i=0; i<comments.length; i++) {%>
                 
-                <li class="col-6 comments justify-content-around mt-5">
+                <li class="col-6 comments justify-content-around mt-2">
                   
-                  <a href="/profile">
-                    
-                    <img class="img-fluid" src="<%=posterImage[i]%>"> <!--small profile image on left with link to that person profile then comment to the right--> 
+                  <a class="center" href="/profile">
+                    <img class="img-fluid " src="<%=posterImage[i]%>"> <!--small profile image on left with link to that person profile then comment to the right--> 
                   </a>
-                  <span><%= comments[i].comment%></span><!--comments to the right of picture-->
+
+                  <p><%= comments[i].comment%></p><!--comments to the right of picture-->
                   
                   
                 </li>

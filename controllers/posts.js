@@ -89,13 +89,15 @@ module.exports = {
       let commentPosterProfilePicArr = [];
 
       const comments = await Comments.find({postId: req.params.id}).sort({ createdAt: "desc" }).lean() //find all comments in comment collection that have postID that matches the id in POST variable 
-      console.log(comments)
+      //console.log(comments)
 
-      //
+      //comment profile pic
       for(let i=0;i<comments.length;i++){
-        const commentPoster = await Profile.find({user: comments[i].madeBy}).sort({createdAt: "desc"});
-        const image = commentPoster[0].profilePic;
-        commentPosterProfilePicArr.push(image);
+        const commentPoster = await Profile.find({user: comments[i].madeBy}).sort({createdAt: "desc"}); //find the profile by the user. User is comments.madeBy which is the profile.user of the person who commented. find all the profiles of the USER for each comment. Loop through comments to find prifile users. Sort in descending order to get most recent profile
+      
+        
+        const image = commentPoster[0].profilePic; //the commentPoster[0] grabs the most recent profile of each commenter and then grabs the image from that profile
+        commentPosterProfilePicArr.push(image); //push images into array in order of comments   
 
       }
       
