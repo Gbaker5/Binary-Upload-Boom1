@@ -3,6 +3,9 @@
 body{
     background-color: #f9dc98;
 }
+.header-ct{
+    border: 5px solid black;
+}
 
 h1 a{
     color:red;
@@ -16,10 +19,22 @@ h1 img{
  height:3em;
  width:3em;
 }
+.ktech{
+    color:red;
+    text-decoration: none;
+}
+
+.ktech:hover{
+    color:white;
+}
 
 .logo-img{
     height:30em;
     width:30em;
+}
+
+.hidden{
+    display: none;
 }
 
 /*Index and Login pages*/
@@ -55,7 +70,7 @@ h1 img{
     width:100%;
 }
 .nav-link:hover{
-    margin: 2px;
+    
     background-color: black;
     color:white;
     border: 1px solid#f9dc98 ;
@@ -96,6 +111,7 @@ h1 img{
     border:red solid 10px;
     border-radius: 180px;
     background-color: black;
+    margin-top: 20px;
 }
 
 .pbox-pics a img{
@@ -110,6 +126,23 @@ h1 img{
     transform:scale(1.3);
     z-index:2;
 }
+
+.propics{
+    height: 200px;
+    width: 200px;
+}
+
+.propics-ct{
+    overflow: auto;
+    white-space: nowrap;
+    border:5px solid;
+    height:400px;
+    background: linear-gradient(to right,black, red);
+    
+}
+
+
+
 
 .profile-input-ct{
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));

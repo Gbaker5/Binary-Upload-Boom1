@@ -40,12 +40,16 @@ module.exports = {
   //profile Edit
   getProfileEdit: async (req, res) => {
     try {
+      
       const count = await Profile.countDocuments({user: req.user.id}) //counts all profile documents
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" });//The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
+      const obj = await Profile.find({id: req.param.id}).sort({_id: "desc"})
       res.render("profileEdit.ejs", { profile: profile, user: req.user }); //renders profile array and user
       
-      console.log(profile)
+      console.log(req.body)
+      //console.log(profile)
       console.log(count)
+      //console.log(obj)
     } catch (err) {
       console.log(err);
     }
@@ -62,6 +66,24 @@ module.exports = {
         cloudinaryId: result.public_id,      
       });
       console.log("Profile picture has been changed!");
+      res.redirect("/profileEdit"); //refresh profileEdit page
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  putProfileEdit: async (req,res) =>{
+    try{
+      console.log(req.body)
+      console.log("yes")
+
+      await Profile.findOneAndUpdate(
+        { profilePic: req.body.profile},
+        {
+          $set: {createdAt: Date.now()},
+        }
+      )
+      console.log("Profile picture has been UPDATED!");
       res.redirect("/profileEdit"); //refresh profileEdit page
     } catch (err) {
       console.log(err);

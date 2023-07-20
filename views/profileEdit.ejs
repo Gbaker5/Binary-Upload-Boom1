@@ -40,6 +40,34 @@
     </div>
 </div>
 
+<div class="profile-input-ct mt-1 col-10">
+
+
+<h2>Previous Profile Pics</h2>
+
+<div class="propics-ct">
+  <ul class="row list-unstyled propics-ul">
+    
+    <% for(var i=0; i<profile.length; i++) {%>
+      <li class="col-2 justify-content-between mt-5 pbox-pics">
+        <img class="img-fluid propics" src="<%=profile[i].profilePic%>">
+        <form 
+        action="/ProfileEdit?_method=PUT"
+        method="POST">
+
+        <input class="hidden" type="hidden" name="profile" value="<%=profile[i].profilePic%>">
+        </form>
+        <button type="submit">
+          Update Profile
+        </button>
+      </li>
+    <% } %>
+    </ul>
+    <!--put an event listener on each image that changes the top profile pic to that image and
+          a route for a submit form that updates database and makes that profile the most recently created profile for that user, change the value of createdAt to Date.now-->
+</div>
+</div>
+
 
 
 
