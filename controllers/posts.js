@@ -46,7 +46,7 @@ module.exports = {
       const obj = await Profile.find({id: req.param.id}).sort({_id: "desc"})
       res.render("profileEdit.ejs", { profile: profile, user: req.user }); //renders profile array and user
       
-      console.log(req.body)
+      
       //console.log(profile)
       console.log(count)
       //console.log(obj)

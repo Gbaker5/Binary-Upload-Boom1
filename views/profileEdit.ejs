@@ -49,17 +49,18 @@
   <ul class="row list-unstyled propics-ul">
     
     <% for(var i=0; i<profile.length; i++) {%>
-      <li class="col-2 justify-content-between mt-5 pbox-pics">
-        <img class="img-fluid propics" src="<%=profile[i].profilePic%>">
+      <li class="col-2 justify-content-between mt-5 ">
+        <img class="img-fluid propics prevpics" src="<%=profile[i].profilePic%>">
         <form 
         action="/ProfileEdit?_method=PUT"
         method="POST">
 
         <input class="hidden" type="hidden" name="profile" value="<%=profile[i].profilePic%>">
-        </form>
-        <button type="submit">
+        <button class="updatebutton" type="submit">
           Update Profile
         </button>
+        </form>
+        
       </li>
     <% } %>
     </ul>

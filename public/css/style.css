@@ -141,8 +141,20 @@ h1 img{
     
 }
 
+ .prevpics{
+    position:relative;
+ }
 
+ .updatebutton{
+    margin-left: 8px;
+    border-radius: 10px;
+    color:white;
+    background-color: #f9dc98;
+ }
 
+ .updatebutton:active{
+    background-color: red;
+ }
 
 .profile-input-ct{
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
