@@ -26,13 +26,13 @@
         <a class="nav-link nav-pills" aria-current="page" href="/profileEdit"><img class="nav-pic" src="<%= profile[0].profilePic%>" alt=""><i class="edit-user fa-solid fa-user-pen"></i></a>
         <a class="nav-link active nav-pills" href="/profile">HOME</a>
         <a class="nav-link nav-pills" href="/feed">FEED</a>
-        <a class="nav-link nav-pills"href="">FRIENDS</a>
+        <a class="nav-link nav-pills"href="/friends">FRIENDS</a>
       </nav>
     </div>
   </div>
    
       <div class=" profile-input-ct ms-1 col-8"> <!--this column takes up the first half of space (contains the forms) allows them to be side by side-->
-          <div class="user-info">
+          <div class="user-info col-6">
               <p><strong>User Name:</strong> <%= user.userName %></p>
               <p><strong>Email:</strong> <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
@@ -56,6 +56,10 @@
               <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
           </div>
+      </div>
+
+      <div class="h2section mt-2 col-10">
+        <h2>My <span>Posts</span></h2>
       </div>
       <!---->
       <div class="col-10"> <!--this column takes up the second half of space (contains all the photos)-->

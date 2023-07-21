@@ -3,6 +3,7 @@ const Post = require("../models/Post");
 const Profile = require("../models/userProfile")
 const Comments = require("../models/Comments")
 const User = require("../models/User")
+const Bio = require("../models/Bio")
 
 module.exports = {
   getSignupProfile: async (req, res) =>{
@@ -199,4 +200,59 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+
+
+//Guest
+getGuest: async (req,res) =>{
+  try{
+
+
+    res.render("guest.ejs", )
+  } catch (err){
+    console.log("This is the guest Profile of ")
+}
+},
+
+//Friends
+
+getFriends: async (req, res) =>{
+  try{
+    const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" });
+
+    res.render("friends.ejs", {profile: profile,})
+  } catch (err){
+    console.log("This is your friends list")
+  }
+},
+//Bio
+putBio: async (req, res) =>{
+ 
+  try{
+    
+    console.log(req.user.id)
+    await Bio.findOneAndUpdate(
+
+      {User: req.user.id}, 
+      { $set: {
+      User: req.user.id,
+      Name: req.body.name,
+      Nickname: req.body.nickname,
+      Age: req.body.age,
+      Sign: req.body.sign,
+      favoriteMovie: req.body.favoriteMovie,
+      favoriteFood: req.body.favoriteFood,
+      favoriteArtist: req.body.favoriteArtist,
+      favoriteSong: req.body.favoriteSong,
+      Coolest: req.body.cool,
+      }
+      },
+      {upsert:true});
+    console.log("Updated Bio!!!");
+    res.redirect("/profile");
+
+} catch (err){
+  console.log(err)
+}
+},
+
 };

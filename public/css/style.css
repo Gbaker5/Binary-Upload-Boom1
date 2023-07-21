@@ -141,25 +141,51 @@ h1 img{
     
 }
 
+
  .prevpics{
     position:relative;
+    border-radius: 20px;
  }
 
  .updatebutton{
     margin-left: 8px;
     border-radius: 10px;
     color:white;
-    background-color: #f9dc98;
+    background-color: red;
+    border-color: black;
  }
 
  .updatebutton:active{
-    background-color: red;
+    background-color: #f9dc98;
+ }
+
+ .h2section{
+    border:5px solid black;
+ }
+
+ .h2section h2{
+    text-align: center;
+ }
+
+ .h2section span{
+    color:red;
  }
 
 .profile-input-ct{
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
     border:1px solid black;
     border-radius: 20px;
+}
+
+.user-info{
+
+}
+
+.user-info{
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    border:1px solid black;
+    border-radius: 5px;
+    padding:8px;
 }
 
 .user-info p{
@@ -232,3 +258,12 @@ h1 img{
    
 }
 
+/*Friends*/
+
+.fList h2{
+    text-align: center;
+}
+
+.allList h2{
+    text-align: center;
+}
