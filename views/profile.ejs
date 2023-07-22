@@ -30,15 +30,36 @@
       </nav>
     </div>
   </div>
+
+    <div class=" profile-input-ct ms-1 col-8">
+      <div class="user-info col-12 mt-4 ">
+        <p><strong>User Name:</strong> <%= user.userName %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+    </div>
+    <div class="h2section mt-4">
+      <h2>Fun <span>Facts</span></h2>
+    </div>
+      <div class="biosec">
+      <p>Name: <span><%=bio.Name%></span></p>
+      <p>NickName: <span><%=bio.Nickname%></span></p>
+      <p>Age: <span><%=bio.Age%></span></p>
+      <p>Sign: <span><%=bio.Sign%></span></p>
+      <p>Favorite Food: <span><%=bio.favoriteFood%></span></p>
+      <p>Favorite Movie: <span><%=bio.favoriteMovie%></span></p>
+      <p>Favorite Artist: <span><%=bio.favoriteArtist%></span></p>
+      <p>Favorite Song: <span><%=bio.favoriteSong%></span></p>
+      <p>Coolest thing about Me: <span><%=bio.Coolest%></span></p>
+      </div>
+    </div>
    
-      <div class=" profile-input-ct ms-1 col-8"> <!--this column takes up the first half of space (contains the forms) allows them to be side by side-->
-          <div class="user-info col-6">
-              <p><strong>User Name:</strong> <%= user.userName %></p>
-              <p><strong>Email:</strong> <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
+      <div class=" profile-input-ct ms-6 col-8"> <!--this column takes up the first half of space (contains the forms) allows them to be side by side-->
+          
           <div class="mt-5">  <!--mt is margin top-->
-            <h2>Add a post</h2>
+            <div class="h2section mb-4">
+              <h2><span>Add</span> A <span>New</span> Post</h2>
+            </div>
+            
             <!--this is the post form-->
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
@@ -53,7 +74,7 @@
                 <label for="imgUpload" class="form-label">Image</label>
                 <input type="file" class="form-control" id="imageUpload2" name="file">
               </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              <button type="submit" class="btn btn-primary mb-2" value="Upload">Submit</button>
             </form>
           </div>
       </div>

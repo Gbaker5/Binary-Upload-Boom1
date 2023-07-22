@@ -1,42 +1,53 @@
 <%- include('partials/header') -%>
 <div class="container">
 
-    <!--Profile Picture-->
-  <%if(profile == 'undefined'){%>
-    <div class="row col-12 justify-content-center">
-    
-      <img class="profile-pic" src="imgs/Default_pfp.svg.png" alt="profile pic">
-   
-  </div>
-  <%} else {%>
+  <!--Profile Picture-->
+  
   <div class="row col-12 justify-content-center">
     
-      <img class="profile-pic" src="<%= profile[0].profilePic%>" alt="profile pic">
-   
+      <img class="profile-pic" src="<%=guestProfile[0].profilePic%>" alt="profile pic">
+      <p><strong><%=bio.Nickname%> (Nickname) Profile</strong></p>
   </div>
 
-<%}%>
+  <div>
 
-    <div class=" profile-input-ct ms-1 col-8"> <!--this column takes up the first half of space (contains the forms) allows them to be side by side-->
-        <div class="user-info">
-            <p><strong>User Name:</strong> <%= user.userName %></p>
-            <p><strong>Email:</strong> <%= user.email %></p>
-            <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-        </div>
-        <div class="mt-5">  <!--mt is margin top-->
-         
-        </div>
+  </div>
+
+
+  <div class="row mt-5"> <!--this is the row for the form and the photos -->
+     
+    <!--Navbar-->
+   <div class="navbar-container col-2"> <!--sidebar nav-->
+    <div class="nav-container">
+      <nav class="nav flex-column">
+        <a class="nav-link nav-pills" aria-current="page" href="/profileEdit"><img class="nav-pic" src="<%= profile[0].profilePic%>" alt=""><i class="edit-user fa-solid fa-user-pen"></i></a>
+        <a class="nav-link active nav-pills" href="/profile">HOME</a>
+        <a class="nav-link nav-pills" href="/feed">FEED</a>
+        <a class="nav-link nav-pills"href="/friends">FRIENDS</a>
+      </nav>
+    </div>
+  </div>
+
+    <div class=" profile-input-ct ms-1 col-8">
+    
+    <div class="h2section mt-4">
+      <h2>Fun <span>Facts</span></h2>
+    </div>
+      <div class="biosec">
+      <p>Name: <span><%=bio.Name%></span></p>
+      <p>NickName: <span><%=bio.Nickname%></span></p>
+      <p>Age: <span><%=bio.Age%></span></p>
+      <p>Sign: <span><%=bio.Sign%></span></p>
+      <p>Favorite Food: <span><%=bio.favoriteFood%></span></p>
+      <p>Favorite Movie: <span><%=bio.favoriteMovie%></span></p>
+      <p>Favorite Artist: <span><%=bio.favoriteArtist%></span></p>
+      <p>Favorite Song: <span><%=bio.favoriteSong%></span></p>
+      <p>Coolest thing about Me: <span><%=bio.Coolest%></span></p>
+      </div>
     </div>
    
     <div class="col-10"> <!--this column takes up the second half of space (contains all the photos)-->
-      <ul class="row list-unstyled">
-      <% for(var i=0; i<posts.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5 pbox-pics">
-          <a href="/post/<%= posts[i]._id%>">
-            <img class="img-fluid" src="<%= posts[i].image%>">
-          </a>
-        </li>
-      <% } %>
+     
       </ul>
       <div class="row justify-content-center mt-5 mb-4">
         <a class="btn btn-primary" href="/feed">Return to Feed</a>

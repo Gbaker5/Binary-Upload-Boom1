@@ -4,6 +4,7 @@ const Profile = require("../models/userProfile")
 const Comments = require("../models/Comments")
 const User = require("../models/User")
 const Bio = require("../models/Bio")
+const Friends = require("../models/Friend")
 
 module.exports = {
   getSignupProfile: async (req, res) =>{
@@ -31,7 +32,9 @@ module.exports = {
     try {
       const posts = await Post.find({ user: req.user.id }); //find all posts in database by user
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }); //The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
-      res.render("profile.ejs", { posts: posts, profile: profile, user: req.user }); //renders profile page with post array, profile array, and user in ejs page
+      const bio = await Bio.findOne({User: req.user.id})
+      
+      res.render("profile.ejs", { posts: posts, profile: profile, user: req.user, bio: bio}); //renders profile page with post array, profile array, and user in ejs page
 
       
     } catch (err) {
@@ -109,6 +112,7 @@ module.exports = {
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }) //profiles of the user that is logged in (this for nav pic)
       const post = await Post.findById(req.params.id); //find post in db with specific id (in ejs id is all the href/link to specific post page)
 
+      let commentPosterIdArr = [];
       let commentPosterProfilePicArr = [];
 
       const comments = await Comments.find({postId: req.params.id}).sort({ createdAt: "desc" }).lean() //find all comments in comment collection that have postID that matches the id in POST variable 
@@ -121,16 +125,21 @@ module.exports = {
         
         const image = commentPoster[0].profilePic; //the commentPoster[0] grabs the most recent profile of each commenter and then grabs the image from that profile
         commentPosterProfilePicArr.push(image); //push images into array in order of comments   
-
+        const commentId = commentPoster[0].user;
+        commentPosterIdArr.push(commentId)
       }
-      
-      //console.log(comments)
+      console.log("Array")
+      console.log(commentPosterIdArr)
+
+
       res.render("post.ejs", { 
         post: post, 
         user: req.user, 
         profile: profile, 
         comments: comments, 
-        posterImage: commentPosterProfilePicArr,});
+        posterImage: commentPosterProfilePicArr,
+        posterId: commentPosterIdArr
+      });
     } catch (err) {
       console.log(err);
     }
@@ -205,9 +214,11 @@ module.exports = {
 //Guest
 getGuest: async (req,res) =>{
   try{
-
-
-    res.render("guest.ejs", )
+    const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }); //The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
+    const guestProfile = await Profile.find({user: req.params.id}).sort({ createdAt: "desc"})
+    const bio = Bio.find({User: req.params.id})
+    console.log(req.params)
+    res.render("guest.ejs", {profile:profile, guestProfile: guestProfile, bio:bio})
   } catch (err){
     console.log("This is the guest Profile of ")
 }
@@ -218,11 +229,33 @@ getGuest: async (req,res) =>{
 getFriends: async (req, res) =>{
   try{
     const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" });
-
-    res.render("friends.ejs", {profile: profile,})
-  } catch (err){
+    const friends = await Friends.find({user: req.user.id}).sort({createdAt: "desc"})
+    res.render("friends.ejs", {profile: profile, friends: friends})
     console.log("This is your friends list")
+  } catch (err){
+    console.log(err)
   }
+},
+
+putFriend: async (req,res) => {
+  try{
+      Friends.findOneAndUpdate(
+        {friend: req.body.profileblah},
+        { $set: {
+          user: req.user.id,
+          friend: req.body.profileblah,
+          createdAt: Date.now()
+        }},
+        {upsert:true}
+      )
+
+
+    res.redirect("/friends")
+    console.log("Added Friend")
+  } catch (err){
+    console.log()
+  }
+
 },
 //Bio
 putBio: async (req, res) =>{

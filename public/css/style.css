@@ -171,14 +171,21 @@ h1 img{
     color:red;
  }
 
+ .biosec > p span{
+    font-size: 24px;
+  background: -webkit-linear-gradient(red, black);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+ }
+
 .profile-input-ct{
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
     border:1px solid black;
     border-radius: 20px;
 }
 
-.user-info{
-
+.user-info-pro{
+   
 }
 
 .user-info{
