@@ -22,6 +22,7 @@ router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 router.get("/guest/:id", ensureAuth, postsController.getGuest)
 router.get("/friends", ensureAuth, postsController.getFriends)
+router.get("/initialBio", ensureAuth, postsController.getInitialBio)
 router.put("/bio", ensureAuth, postsController.putBio)
 
 module.exports = router;

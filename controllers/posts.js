@@ -22,9 +22,20 @@ module.exports = {
         cloudinaryId: result.public_id,      
       });
       console.log("Profile picture has been changed!");
-      res.redirect("/profile"); //refresh profileEdit page
+      res.redirect("/initialBio"); //refresh profileEdit page
     } catch (err) {
       console.log(err);
+    }
+  },
+
+  getInitialBio: async (req,res) =>{
+    try{
+
+
+      res.render("initialBio.ejs")
+      
+    } catch (err){
+      console.log(err)
     }
   },
 
@@ -120,17 +131,25 @@ module.exports = {
 
       //comment profile pic
       for(let i=0;i<comments.length;i++){
-        const commentPoster = await Profile.find({user: comments[i].madeBy}).sort({createdAt: "desc"}); //find the profile by the user. User is comments.madeBy which is the profile.user of the person who commented. find all the profiles of the USER for each comment. Loop through comments to find prifile users. Sort in descending order to get most recent profile
+        const commentPoster = await Profile.find({user: comments[i].madeBy}).sort({createdAt: "desc"}); //find the profile by the user. User is comments.madeBy which is the profile.user of the person who commented. find ALL the profiles of the USER for each comment. Loop through comments to find prifile users. Sort in descending order to get most recent profile
       
         
         const image = commentPoster[0].profilePic; //the commentPoster[0] grabs the most recent profile of each commenter and then grabs the image from that profile
         commentPosterProfilePicArr.push(image); //push images into array in order of comments   
-        const commentId = commentPoster[0].user;
-        commentPosterIdArr.push(commentId)
+        const commentId = commentPoster[0].user; //id of each commenter
+        commentPosterIdArr.push(commentId) //these ids are to be put in the anchor tag for each commenter /guest/"user-id"
       }
       console.log("Array")
       console.log(commentPosterIdArr)
-
+      //Name next to comment - Nickname from Bio
+      let nameArr = [];
+      for(let j=0;j<commentPosterIdArr.length;j++){
+      const BioArr = await Bio.find({User: commentPosterIdArr[j]}) //Bio Arr from ordered list of commenter ids
+      console.log(BioArr)
+      const nicknames = BioArr[0].Nickname //Nicknames from each Bio
+      nameArr.push(nicknames)
+      }
+      console.log(nameArr)
 
       res.render("post.ejs", { 
         post: post, 
@@ -138,7 +157,8 @@ module.exports = {
         profile: profile, 
         comments: comments, 
         posterImage: commentPosterProfilePicArr,
-        posterId: commentPosterIdArr
+        posterId: commentPosterIdArr,
+        name: nameArr,
       });
     } catch (err) {
       console.log(err);
@@ -214,13 +234,17 @@ module.exports = {
 //Guest
 getGuest: async (req,res) =>{
   try{
-    const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }); //The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
+    
+    const profile = await Profile.find({user: req.user.id }).sort({ createdAt: "desc" }); //The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
     const guestProfile = await Profile.find({user: req.params.id}).sort({ createdAt: "desc"})
-    const bio = Bio.find({User: req.params.id})
-    console.log(req.params)
-    res.render("guest.ejs", {profile:profile, guestProfile: guestProfile, bio:bio})
+    console.log(req.params.id)
+    const theBio = await Bio.find({User: req.params.id})
+    console.log(theBio)
+    const posts = Post.find({user: req.params.id}).sort({createdAt: "desc"})
+    //console.log(posts)
+    res.render("guest.ejs", {profile:profile, guestProfile: guestProfile, bio:theBio, posts:posts})
   } catch (err){
-    console.log("This is the guest Profile of ")
+    console.log("This is the guest Profile of" + req.params)
 }
 },
 
@@ -228,7 +252,7 @@ getGuest: async (req,res) =>{
 
 getFriends: async (req, res) =>{
   try{
-    const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" });
+    const profile = await Profile.find({user: req.user.id }).sort({ createdAt: "desc" });
     const friends = await Friends.find({user: req.user.id}).sort({createdAt: "desc"})
     res.render("friends.ejs", {profile: profile, friends: friends})
     console.log("This is your friends list")
