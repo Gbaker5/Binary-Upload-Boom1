@@ -237,11 +237,11 @@ getGuest: async (req,res) =>{
     
     const profile = await Profile.find({user: req.user.id }).sort({ createdAt: "desc" }); //The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
     const guestProfile = await Profile.find({user: req.params.id}).sort({ createdAt: "desc"})
-    console.log(req.params.id)
+    //console.log(req.params.id)
     const theBio = await Bio.find({User: req.params.id})
-    console.log(theBio)
-    const posts = Post.find({user: req.params.id}).sort({createdAt: "desc"})
-    //console.log(posts)
+   // console.log(theBio)
+    const posts = await Post.find({user: req.params.id}).sort({createdAt: "desc"})
+    console.log(posts)
     res.render("guest.ejs", {profile:profile, guestProfile: guestProfile, bio:theBio, posts:posts})
   } catch (err){
     console.log("This is the guest Profile of" + req.params)

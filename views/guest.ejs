@@ -50,7 +50,31 @@
       <p>Coolest thing about Me: <span><%=bio[0].Coolest%></span></p>
       </div>
     </div>
+
+    <div class="h2section">
+
+      <%if(bio[0].Nickname == ""){%>
+        <h2 class="bioName"><%=bio[0].Name%>'s Friends</h2>
+     <% }else{ %>
+        <h2 class="bioName"><%=bio[0].Nickname%>'s Friends</h2>
+      <%}%>
+      
+    </div>
+   <div class="profile-input-ct friend-ct">
    
+    <div class="friend-box">
+
+    </div>
+
+  
+   </div>
+   <div class="h2section">
+    <%if(bio[0].Nickname == ""){%>
+      <h2 class="bioName"><%=bio[0].Name%>'s Posts</h2>
+   <% }else{ %>
+      <h2 class="bioName"><%=bio[0].Nickname%>'s Posts</h2>
+    <%}%>
+   </div>
     <div class="col-10"> <!--this column takes up the second half of space (contains all the photos)-->
       <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>
