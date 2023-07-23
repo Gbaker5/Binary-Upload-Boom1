@@ -274,3 +274,8 @@ h1 img{
 .allList h2{
     text-align: center;
 }
+/*Bio*/
+.bioName{
+    font-size: 50px;
+    text-align: center;
+}

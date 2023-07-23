@@ -6,7 +6,12 @@
   <div class="row col-12 justify-content-center">
     
       <img class="profile-pic" src="<%=guestProfile[0].profilePic%>" alt="profile pic">
-      <p><strong><%=bio.Nickname%> (Nickname) Profile</strong></p>
+      <%if(bio[0].Nickname == ""){%>
+        <p class="bioName"><strong><%=bio[0].Name%></strong></p>
+     <% }else{ %>
+        <p class="bioName"><strong><%=bio[0].Nickname%></strong></p>
+      <%}%>
+      
   </div>
 
   <div>
@@ -34,15 +39,15 @@
       <h2>Fun <span>Facts</span></h2>
     </div>
       <div class="biosec">
-      <p>Name: <span><%=bio.Name%></span></p>
-      <p>NickName: <span><%=bio.Nickname%></span></p>
-      <p>Age: <span><%=bio.Age%></span></p>
-      <p>Sign: <span><%=bio.Sign%></span></p>
-      <p>Favorite Food: <span><%=bio.favoriteFood%></span></p>
-      <p>Favorite Movie: <span><%=bio.favoriteMovie%></span></p>
-      <p>Favorite Artist: <span><%=bio.favoriteArtist%></span></p>
-      <p>Favorite Song: <span><%=bio.favoriteSong%></span></p>
-      <p>Coolest thing about Me: <span><%=bio.Coolest%></span></p>
+      <p>Name: <span><%=bio[0].Name%></span></p>
+      <p>NickName: <span><%=bio[0].Nickname%></span></p>
+      <p>Age: <span><%=bio[0].Age%></span></p>
+      <p>Sign: <span><%=bio[0].Sign%></span></p>
+      <p>Favorite Food: <span><%=bio[0].favoriteFood%></span></p>
+      <p>Favorite Movie: <span><%=bio[0].favoriteMovie%></span></p>
+      <p>Favorite Artist: <span><%=bio[0].favoriteArtist%></span></p>
+      <p>Favorite Song: <span><%=bio[0].favoriteSong%></span></p>
+      <p>Coolest thing about Me: <span><%=bio[0].Coolest%></span></p>
       </div>
     </div>
    
