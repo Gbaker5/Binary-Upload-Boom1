@@ -15,12 +15,31 @@
 
      <div class="fList profile-input-ct ms-1 col-8">
         <h2>Friends List</h2>
-        
+        <ul class="row list-unstyled">
+          <% for(var i=0; i<friends.length; i++) {%>
+            <li class="col-6 justify-content-between mt-5 pbox-pics">
+              <%if(nicknames[i] == ""){%>
+                <a href="">
+                
+                  <%=nicknames[i]%>
+                  
+                  <img class="img-fluid" src="<%=profilepics[i]%>">
+                </a>
+              <%}else{%>
+                <a href="">
+                
+                  <%=names[i]%>
+                  
+                  <img class="img-fluid" src="<%=profilepics[i]%>">
+                </a>
+              <%}%>
+              
+            </li>
+          <% } %>
+          </ul>
      </div>
 
-     <div class="allList profile-input-ct ms-1 col-8">
-        <h2>All Users</h2>
-     </div>
+     
 
 
 

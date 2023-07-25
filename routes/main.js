@@ -5,6 +5,7 @@ const homeController = require("../controllers/home");
 const postsController = require("../controllers/posts");
 const upload = require("../middleware/multer");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
+const { putFriend } = require("../controllers/posts");
 
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
@@ -22,6 +23,7 @@ router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 router.get("/guest/:id", ensureAuth, postsController.getGuest)
 router.get("/friends", ensureAuth, postsController.getFriends)
+router.put("/friends", ensureAuth, postsController.putFriend)
 router.get("/initialBio", ensureAuth, postsController.getInitialBio)
 router.put("/bio", ensureAuth, postsController.putBio)
 

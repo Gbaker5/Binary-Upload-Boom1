@@ -15,7 +15,10 @@
   </div>
 
   <div>
-
+      <form action="/friends?_method=PUT" method="POST" >
+        <input class="hidden" type="text" name="friendId" value="<%=guestProfile[0].user%>">
+        <button>Add Friend</button>
+      </form>
   </div>
 
 
@@ -60,6 +63,7 @@
       <%}%>
       
     </div>
+
    <div class="profile-input-ct friend-ct">
    
     <div class="friend-box">
@@ -68,6 +72,7 @@
 
   
    </div>
+
    <div class="h2section">
     <%if(bio[0].Nickname == ""){%>
       <h2 class="bioName"><%=bio[0].Name%>'s Posts</h2>

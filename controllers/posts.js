@@ -31,9 +31,7 @@ module.exports = {
   getInitialBio: async (req,res) =>{
     try{
 
-
       res.render("initialBio.ejs")
-      
     } catch (err){
       console.log(err)
     }
@@ -237,11 +235,11 @@ getGuest: async (req,res) =>{
     
     const profile = await Profile.find({user: req.user.id }).sort({ createdAt: "desc" }); //The profile.find finds all profile pics from that user and displays in an array. the sort fuction sorts them in descending order (in the ejs i choose the first object on the list)
     const guestProfile = await Profile.find({user: req.params.id}).sort({ createdAt: "desc"})
-    //console.log(req.params.id)
+    //console.log(guestProfile[0])
     const theBio = await Bio.find({User: req.params.id})
    // console.log(theBio)
     const posts = await Post.find({user: req.params.id}).sort({createdAt: "desc"})
-    console.log(posts)
+    //console.log(posts)
     res.render("guest.ejs", {profile:profile, guestProfile: guestProfile, bio:theBio, posts:posts})
   } catch (err){
     console.log("This is the guest Profile of" + req.params)
@@ -254,7 +252,31 @@ getFriends: async (req, res) =>{
   try{
     const profile = await Profile.find({user: req.user.id }).sort({ createdAt: "desc" });
     const friends = await Friends.find({user: req.user.id}).sort({createdAt: "desc"})
-    res.render("friends.ejs", {profile: profile, friends: friends})
+
+    let profilepics = [];
+    let nameArr = [];
+    let nicknameArr = [];
+
+    for(let i=0;i<friends.length;i++){
+      const friendProfiles = await Profile.find({user: friends[i].friend}).sort({createdAt: "desc"})
+      //console.log(friendProfiles)
+      const images = friendProfiles[0].profilePic
+      profilepics.push(images)
+
+      const bios = await Bio.find({User:friends[i].friend})
+      names = bios[0].Name
+      //console.log(names)
+      nameArr.push(names)
+      //console.log(nameArr)
+      //console.log(bios)
+      nicknames = bios[0].Nickname
+      console.log(nicknames)
+      nicknameArr.push(nicknames)
+      console.log(nicknameArr)
+    }
+    
+    //console.log(friends)
+    res.render("friends.ejs", {profile: profile, friends: friends, profilepics: profilepics, names: nameArr, nicknames: nicknameArr})
     console.log("This is your friends list")
   } catch (err){
     console.log(err)
@@ -263,18 +285,21 @@ getFriends: async (req, res) =>{
 
 putFriend: async (req,res) => {
   try{
-      Friends.findOneAndUpdate(
-        {friend: req.body.profileblah},
+    
+    console.log(req.body.friendId)
+    
+      await Friends.findOneAndUpdate(
+        {friend: req.body.friendId},
         { $set: {
           user: req.user.id,
-          friend: req.body.profileblah,
+          friend: req.body.friendId,
           createdAt: Date.now()
         }},
         {upsert:true}
-      )
+      );
 
 
-    res.redirect("/friends")
+    res.redirect(`/guest/${req.body.friendId}`)
     console.log("Added Friend")
   } catch (err){
     console.log()
