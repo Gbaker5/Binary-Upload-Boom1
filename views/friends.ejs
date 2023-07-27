@@ -17,20 +17,20 @@
         <h2>Friends List</h2>
         <ul class="row list-unstyled">
           <% for(var i=0; i<friends.length; i++) {%>
-            <li class="col-6 justify-content-between mt-5 pbox-pics">
+            <li class="col-6 justify-content-between mt-5 friends-pic-ct">
               <%if(nicknames[i] == ""){%>
-                <a href="">
+                <a href="/guest/<%=friends[i].friend%>">
                 
-                  <%=nicknames[i]%>
+                  <p class="namesp"><%=names[i]%></p>
                   
-                  <img class="img-fluid" src="<%=profilepics[i]%>">
+                  <img class="friends-pic img-fluid" src="<%=profilepics[i]%>">
                 </a>
               <%}else{%>
-                <a href="">
+                <a href="/guest/<%=friends[i].friend%>">
                 
-                  <%=names[i]%>
+                  <p class="namesp"><%=nicknames[i]%></p>
                   
-                  <img class="img-fluid" src="<%=profilepics[i]%>">
+                  <img class="friends-pic img-fluid" src="<%=profilepics[i]%>">
                 </a>
               <%}%>
               

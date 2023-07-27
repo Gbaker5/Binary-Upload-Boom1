@@ -1,48 +1,48 @@
 <%- include('partials/header') -%>
-<div class=" profile-input-ct ms-1 col-8">
-<div>
+<div class="biosection  ms-8 col-6">
+<div class="h2section">
     <h2>Tell us About yourself</h2>
 </div>
 
 <form action="/bio?_method=PUT" method="POST">
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="name" class="form-label">Name</label>
       <input type="text" class="form-control" id="name" name="name">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="nickname" class="form-label">Nickname</label>
       <input type="text" class="form-control" id="nickname" name="nickname">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="age" class="form-label">Age</label>
       <input type="text" class="form-control" id="age" name="age">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="sign" class="form-label">Zodiac Sign</label>
       <input type="text" class="form-control" id="sign" name="sign">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="favoriteFood" class="form-label">Favorite Food</label>
       <input type="text" class="form-control" id="favoriteFood" name="favoriteFood">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="favoriteMovie" class="form-label">Favorite Movie</label>
       <input type="text" class="form-control" id="favoriteMovie" name="favoriteMovie">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="favoriteArtist" class="form-label">Favorite Artist</label>
       <input type="text" class="form-control" id="favoriteArtist" name="favoriteArtist">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="favoriteSong" class="form-label">Favorite Song</label>
       <input type="text" class="form-control" id="favoriteSong" name="favoriteSong">
     </div>
-    <div class="mb-3">
+    <div class="mb-3 bioinputs">
       <label for="cool" class="form-label">Coolest thing about you</label>
       <textarea type="text" class="form-control" id="cool" name="cool"></textarea>
     </div>
 
-    <button type="submit">Update Bio</button>
+    <button class="biobutton" type="submit">Update Bio</button>
   </form>
 </div>
   <%- include('partials/footer') -%>
