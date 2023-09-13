@@ -320,7 +320,7 @@ putBio: async (req, res) =>{
       Name: req.body.name,
       Nickname: req.body.nickname,
       Age: req.body.age,
-      Sign: req.body.sign,
+      Sign: req.body.sign[0],
       favoriteMovie: req.body.favoriteMovie,
       favoriteFood: req.body.favoriteFood,
       favoriteArtist: req.body.favoriteArtist,
@@ -329,6 +329,7 @@ putBio: async (req, res) =>{
       }
       },
       {upsert:true});
+      console.log(req.body.sign)
     console.log("Updated Bio!!!");
     res.redirect("/profile");
 

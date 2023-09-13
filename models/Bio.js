@@ -8,47 +8,47 @@ const bioSchema = new mongoose.Schema({
     Name:{
         type: String,
     
-        default: " ",
+        
     },
     Nickname:{
         type: String,
     
-        default: " ",
+       
     },
     Age:{
         type: Number,
     
-        default: " ",
+       
     },
     Sign:{
         type: String,
     
-        default: " ",
+        
     },
     favoriteFood:{
         type: String,
     
-        default: " ",
+        
     },
     favoriteMovie:{
         type: String,
     
-        default: " ",
+        
     },
     favoriteArtist:{
         type: String,
     
-        default: " ",
+        
     },
     favoriteSong:{
         type: String,
     
-        default: " ",
+        
     },
     Coolest:{
         type: String,
     
-        default: " ",
+        
     },
 
 })

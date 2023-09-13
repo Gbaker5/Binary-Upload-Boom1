@@ -332,3 +332,9 @@ h1 img{
     text-decoration: none;
     color:white;
 }
+/*Guest*/
+
+.addbutton{
+    background-color: red;
+    color:white;
+}
