@@ -11,6 +11,7 @@ module.exports = {
 createComment: async (req, res) => {
     try {
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }) //profiles of the user that is logged in (this for nav pic)
+      console.log(req.params)
       //console.log(profile)
       //console.log(profile[0].profilePic)
       await Comments.create({

@@ -265,6 +265,43 @@ h1 img{
    
 }
 
+.posterImg{
+    border: 4px solid black;
+    border-radius: 5px;
+    background-color: red;
+    float: right;
+    height: 300px;
+    width: 250px;
+    list-style-type: none;
+    margin-right: 30px;
+    position:relative;
+    color:white;
+}
+
+.posterImg > li> img{
+    height: 200px;
+    width: 242px;
+    margin: 0;
+    position:absolute;
+    left:0;
+    border-bottom:3px solid black;
+    
+}
+
+.posterText{
+    position:absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.posterLink{
+    color:white;
+    font-size: large;
+}
+
+.posterLink:hover{
+    color:black
+}
 /*Friends*/
 
 .fList h2{
@@ -274,6 +311,8 @@ h1 img{
 .allList h2{
     text-align: center;
 }
+
+
 /*Bio*/
 
 .biosection{

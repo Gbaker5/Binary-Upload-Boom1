@@ -47,10 +47,18 @@
     </div>
 
       <div class="col-11 comments-ct mt-1 "><!--comments-->
-      
+
+        <ul class="posterImg commentul row col-3 mt-5">
+          <li><img class="" src="<%= ogPoster %>" alt="OG POSTER"></li>
+          <li class="posterText">
+            <p>post by: </p>
+            <p><a href="" class="posterLink"><strong><%=ogName%></strong></a></p>
+          </li>
+        </ul>
+
         <div class="col-7 mt-2 comments-ct2">
             
-          <ul class="row col-10 list-group">
+          <ul class="row col-7 list-group ">
             <% for(var i=0; i<comments.length; i++) {%>
                 
                 <li class="col-6 comments justify-content-around mt-2">
@@ -65,8 +73,12 @@
                 </li>
               <% } %>
           </ul>
+         
+
+          
 
         </div>
+       
 
             <form class="mb-2" action="/comment/createComment/<%=post._id%>" method="POST">
              <div class="mb-3">
@@ -76,6 +88,8 @@
             <button type="submit" class="btn btn-primary">Post</button>
             </form>
       </div>
+
+     
       </div>
 
     <div class="col-6 mt-5">

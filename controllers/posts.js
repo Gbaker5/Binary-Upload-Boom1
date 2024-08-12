@@ -137,17 +137,34 @@ module.exports = {
         const commentId = commentPoster[0].user; //id of each commenter
         commentPosterIdArr.push(commentId) //these ids are to be put in the anchor tag for each commenter /guest/"user-id"
       }
-      console.log("Array")
-      console.log(commentPosterIdArr)
+      //console.log("Array")
+      //console.log(commentPosterIdArr)
       //Name next to comment - Nickname from Bio
       let nameArr = [];
       for(let j=0;j<commentPosterIdArr.length;j++){
       const BioArr = await Bio.find({User: commentPosterIdArr[j]}) //Bio Arr from ordered list of commenter ids
-      console.log(BioArr)
+      //console.log(BioArr)
       const nicknames = BioArr[0].Nickname //Nicknames from each Bio
       nameArr.push(nicknames)
       }
-      console.log(nameArr)
+      //////////////display the picture of the person who posted
+      let posterProfileImg = [];
+      let posterProfiles = await Profile.find({user: post.user}).sort({createdAt: "desc"});
+      //console.log(posterProfiles)
+      //const ogPosterImg = posterProfiles[0].profilePic
+      const ogPosterImg = posterProfiles.length > 0 ? posterProfiles[0].profilePic : null;
+      //console.log(ogPosterImg)
+      
+      /////////display the name of the person who posted
+      const posterBio = await Bio.find({User: post.user})
+      console.log(posterBio)
+      const posterName = posterBio[0].Nickname
+      console.log(posterName)
+
+
+      //console.log(post.user)
+      
+      //console.log(nameArr)
 
       res.render("post.ejs", { 
         post: post, 
@@ -157,6 +174,10 @@ module.exports = {
         posterImage: commentPosterProfilePicArr,
         posterId: commentPosterIdArr,
         name: nameArr,
+        ogPoster: ogPosterImg,
+        ogName: posterName,
+        
+        //posterProfile: posterProfileImg,
       });
     } catch (err) {
       console.log(err);
