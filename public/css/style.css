@@ -215,6 +215,22 @@ h1 img{
     position:relative;
 }
 
+.nocomment-ct{
+   height:100%;
+   width: 100%;
+    
+}
+
+.nocomment{
+    color:white;
+    font-size: 1.5em;
+    padding: 5px;
+    background-color: red;
+    border: 1px solid white;
+}
+
+
+
 .center2{
     display: block;
     margin-left: auto;

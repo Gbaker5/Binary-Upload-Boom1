@@ -52,15 +52,26 @@
           <li><img class="" src="<%= ogPoster %>" alt="OG POSTER"></li>
           <li class="posterText">
             <p>post by: </p>
-            <p><a href="" class="posterLink"><strong><%=ogName%></strong></a></p>
+            <p><a href="/guest/<%=posterLink%>" class="posterLink"><strong><%=ogName%></strong></a></p>
           </li>
         </ul>
 
         <div class="col-7 mt-2 comments-ct2">
             
           <ul class="row col-7 list-group ">
-            <% for(var i=0; i<comments.length; i++) {%>
-                
+            
+
+              <%if(comments.length === 0){%>
+
+                <li class="nocomment-ct">
+                    
+                    <p class="nocomment ">No comments Yet</p>
+                </li>
+
+              <%}else{%>
+
+                <% for(var i=0; i<comments.length; i++) {%>
+
                 <li class="col-6 comments justify-content-around mt-2">
                   
                   <a class="center" href="/guest/<%=posterId[i]%>">
@@ -71,6 +82,8 @@
                   
                   
                 </li>
+
+              <%}%>
               <% } %>
           </ul>
          

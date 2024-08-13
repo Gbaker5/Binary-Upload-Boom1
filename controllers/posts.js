@@ -118,14 +118,15 @@ module.exports = {
       //const allProfile = await Profile.find()
       //const allUsers = await User.find()
       //const allProfile = await Profile.find()
+
       const profile = await Profile.find({ user: req.user.id }).sort({ createdAt: "desc" }) //profiles of the user that is logged in (this for nav pic)
       const post = await Post.findById(req.params.id); //find post in db with specific id (in ejs id is all the href/link to specific post page)
 
       let commentPosterIdArr = [];
       let commentPosterProfilePicArr = [];
 
-      const comments = await Comments.find({postId: req.params.id}).sort({ createdAt: "desc" }).lean() //find all comments in comment collection that have postID that matches the id in POST variable 
-      //console.log(comments)
+      const comments = await Comments.find({postId: req.params.id}).sort({ createdAt: "desc" }).lean() || [] //find all comments in comment collection that have postID that matches the id in POST variable 
+      console.log(comments)
 
       //comment profile pic
       for(let i=0;i<comments.length;i++){
@@ -139,7 +140,8 @@ module.exports = {
       }
       //console.log("Array")
       //console.log(commentPosterIdArr)
-      //Name next to comment - Nickname from Bio
+
+      ///////Name next to comment - Nickname from Bio
       let nameArr = [];
       for(let j=0;j<commentPosterIdArr.length;j++){
       const BioArr = await Bio.find({User: commentPosterIdArr[j]}) //Bio Arr from ordered list of commenter ids
@@ -157,9 +159,9 @@ module.exports = {
       
       /////////display the name of the person who posted
       const posterBio = await Bio.find({User: post.user})
-      console.log(posterBio)
+      //console.log(posterBio)
       const posterName = posterBio[0].Nickname
-      console.log(posterName)
+      //console.log(posterName)
 
 
       //console.log(post.user)
@@ -176,6 +178,7 @@ module.exports = {
         name: nameArr,
         ogPoster: ogPosterImg,
         ogName: posterName,
+        posterLink: post.user
         
         //posterProfile: posterProfileImg,
       });
